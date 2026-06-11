@@ -1,0 +1,27 @@
+export const defaultPortfolioData = {
+  personal: {
+    name: '',
+    title: '',
+    email: '',
+    phone: '',
+    location: '',
+    website: '',
+    avatar: '',
+    bio: '',
+    resume: '',
+  },
+  experience: [],
+  projects: [],
+  skills: [],
+  education: [],
+  socials: [],
+  theme: {
+    template: 'modern',
+    primary: '#2563eb',
+    secondary: '#1e293b',
+    background: '#ffffff',
+    text: '#1f2937',
+    font: 'inter',
+    spacing: 'normal',
+  },
+}
