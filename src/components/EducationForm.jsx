@@ -1,10 +1,11 @@
 import { usePortfolio } from '../context/PortfolioContext'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, Trash2, GripVertical, GraduationCap } from 'lucide-react'
+import { Plus, Trash2, GraduationCap } from 'lucide-react'
 import { useState } from 'react'
+import { DndSectionList } from './DndSectionList'
 
 export function EducationForm() {
-  const { data, addItem, updateItem, removeItem } = usePortfolio()
+  const { data, addItem, updateItem, removeItem, reorderItems } = usePortfolio()
   const [expandedId, setExpandedId] = useState(null)
 
   return (
@@ -27,18 +28,18 @@ export function EducationForm() {
         </button>
       </div>
 
-      <AnimatePresence>
-        {data.education.map((edu) => (
+      <DndSectionList
+        items={data.education}
+        onReorder={(from, to) => reorderItems('education', from, to)}
+        renderItem={(edu) => (
           <motion.div
-            key={edu.id}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="border border-white/10 rounded-xl p-6 hover:border-green-500/30 transition-colors bg-white/5"
+            className="border border-white/10 rounded-xl p-6 pl-10 hover:border-green-500/30 transition-colors bg-white/5"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-4 flex-1">
-                <GripVertical className="w-5 h-5 text-gray-500 cursor-move" />
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-white">
                     {edu.degree || 'New Degree'}
@@ -119,8 +120,8 @@ export function EducationForm() {
               )}
             </AnimatePresence>
           </motion.div>
-        ))}
-      </AnimatePresence>
+        )}
+      />
     </motion.div>
   )
 }

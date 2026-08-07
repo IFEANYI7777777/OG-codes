@@ -1,8 +1,9 @@
 import { usePortfolio } from '../context/PortfolioContext'
 import { MapPin, Mail, Phone, Globe, ExternalLink } from 'lucide-react'
 
-export function PortfolioPreview() {
-  const { data } = usePortfolio()
+export function PortfolioPreview({ data: propData }) {
+  const { data: ctxData } = usePortfolio()
+  const data = propData || ctxData
   const p = data.personal
   const theme = data.theme
 
